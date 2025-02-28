@@ -7,9 +7,21 @@
     gap: 8px;
 }
 
-.note_box{
+.contents_section{
     display: flex;
     flex-direction: column;
+}
+
+.content_grid{
+    min-height: 150px;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.note_box{
+    display: flex;
     flex-wrap: wrap;
     padding: 8px;
     gap: 8px;
