@@ -1,7 +1,7 @@
 
 let allNotes = {
-    'notesTitles': ["Ba", "Aufgabe"],
-    'notes': ["Banana", "Hausaufgaben machen"],
+    'notesTitles': [],
+    'notes': [],
     'archivedNotesTitles': [],
     'archivedNotes': [],
     'trashNotesTitles': [],
@@ -10,9 +10,7 @@ let allNotes = {
 
 function init() {
     getFromLocalStorage();
-    renderNotes();
-    renderArchivedNotes();
-    renderTrashNotes();
+    renderAllNotes();
 }
 
 function saveToLocalStorage(){
@@ -73,9 +71,7 @@ function addNote() {
         noteInputRef.value = "";
         noteTitleInputRef.value = "";
     }
-
     saveToLocalStorage();
-
     renderAllNotes()
 }
 
@@ -87,7 +83,6 @@ function moveNote(indexNote, startKey, destinationKey) {
     allNotes[destinationKey + "Titles"].push(noteTitleRef[0]);
 
     saveToLocalStorage();
-
     renderAllNotes()
 }
 
@@ -96,7 +91,5 @@ function deleteNote(indexTrashNote) {
     allNotes.trashNotesTitles.splice(indexTrashNote, 1);
 
     saveToLocalStorage();
-
     renderAllNotes()
 }
-

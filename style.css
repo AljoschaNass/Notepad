@@ -14,6 +14,7 @@
     padding: 8px;
     gap: 8px;
 }
+
 .note_box > div{
     display: flex;
     gap: 8px;
