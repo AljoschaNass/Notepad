@@ -1,24 +1,25 @@
-.note{
-    width: 150px;
-    height: 150px;
-    background-color: rgb(40, 40, 40);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px;
-    border-radius: 8px;
+.note {
+  width: 150px;
+  height: 150px;
+  background-color: rgb(40, 40, 40);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 8px;
 }
 
-.note > h3, .note > p{
-    display: flex;
-    justify-content: center;
-    width: 100%;
+.note > h3,
+.note > p {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-.note > div{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
+.note > div {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }

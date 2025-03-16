@@ -1,6 +1,5 @@
-
 function getNoteTemplate(indexNote) {
-    return `
+  return `
         <div class="note">
             <h3>${allNotes.notesTitles[indexNote]}</h3>
             <p>${allNotes.notes[indexNote]}</p>
@@ -17,7 +16,7 @@ function getNoteTemplate(indexNote) {
 }
 
 function getArchivedNoteTemplate(indexArchivedNote) {
-    return  `
+  return `
         <div class="note">
             <h3>${allNotes.archivedNotesTitles[indexArchivedNote]}</h3>
             <p>${allNotes.archivedNotes[indexArchivedNote]}</p>
@@ -34,7 +33,7 @@ function getArchivedNoteTemplate(indexArchivedNote) {
 }
 
 function getTrashNoteTemplate(indexTrashNote) {
-    return  `
+  return `
         <div class="note">
             <h3>${allNotes.trashNotesTitles[indexTrashNote]}</h3>
             <p>${allNotes.trashNotes[indexTrashNote]}</p>
