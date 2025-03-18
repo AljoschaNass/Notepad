@@ -7,6 +7,22 @@ let allNotes = {
   trashNotes: [],
 };
 
+let inputTitle = document.getElementById("note_title_input");
+inputTitle.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("btn_add_note").click();
+  }
+});
+
+let inputNote = document.getElementById("note_input");
+inputNote.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("btn_add_note").click();
+  }
+});
+
 function init() {
   getFromLocalStorage();
   renderAllNotes();
