@@ -7,6 +7,9 @@ let allNotes = {
   trashNotes: [],
 };
 
+let currentDraggedElement;
+let currentDraggedElementId;
+
 let inputTitle = document.getElementById("note_title_input");
 inputTitle.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
@@ -114,5 +117,19 @@ function deleteNote(indexTrashNote) {
   allNotes.trashNotesTitles.splice(indexTrashNote, 1);
 
   saveToLocalStorage();
+  renderAllNotes();
+}
+
+function startDragging(i, e) {
+  currentDraggedElement = e;
+  currentDraggedElementId = i;
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function moveTo(category) {
+  moveNote(currentDraggedElementId, currentDraggedElement, category); 
   renderAllNotes();
 }

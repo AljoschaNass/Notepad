@@ -1,6 +1,6 @@
 function getNoteTemplate(indexNote) {
   return `
-        <div class="note">
+        <div draggable="true" ondragstart="startDragging(${indexNote}, 'notes')" class="note">
             <h3>${allNotes.notesTitles[indexNote]}</h3>
             <p>${allNotes.notes[indexNote]}</p>
             <div>
@@ -17,7 +17,7 @@ function getNoteTemplate(indexNote) {
 
 function getArchivedNoteTemplate(indexArchivedNote) {
   return `
-        <div class="note">
+        <div draggable="true" ondragstart="startDragging(${indexArchivedNote}, 'archivedNotes')" class="note">
             <h3>${allNotes.archivedNotesTitles[indexArchivedNote]}</h3>
             <p>${allNotes.archivedNotes[indexArchivedNote]}</p>
             <div>
@@ -34,7 +34,7 @@ function getArchivedNoteTemplate(indexArchivedNote) {
 
 function getTrashNoteTemplate(indexTrashNote) {
   return `
-        <div class="note">
+        <div draggable="true" ondragstart="startDragging(${indexTrashNote}, 'trashNotes')" class="note">
             <h3>${allNotes.trashNotesTitles[indexTrashNote]}</h3>
             <p>${allNotes.trashNotes[indexTrashNote]}</p>
             <div>

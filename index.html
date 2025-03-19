@@ -31,17 +31,17 @@
     <div class="note_box">
       <div class="contents_section">
         <h2>Notes</h2>
-        <div id="notes_content" class="content_grid"></div>
+        <div id="notes_content" class="content_grid" ondragover="allowDrop(event)" ondrop="moveTo('notes')"></div>
       </div>
 
       <div class="contents_section">
         <h2>Archive</h2>
-        <div id="archived_content" class="content_grid"></div>
+        <div id="archived_content" class="content_grid" ondragover="allowDrop(event)" ondrop="moveTo('archivedNotes')"></div>
       </div>
 
       <div class="contents_section">
         <h2>Trash</h2>
-        <div id="trash_content" class="content_grid"></div>
+        <div id="trash_content" class="content_grid" ondragover="allowDrop(event)" ondrop="moveTo('trashNotes')"></div>
       </div>
     </div>
 
