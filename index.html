@@ -18,12 +18,16 @@
   <body onload="init()">
     <h1>Notepad</h1>
 
+    <div class="search_box">
+      <input id="search_input" placeholder="Notizen durchsuchen..." type="text" oninput="filterNotes()" />
+    </div>
+
     <div class="input_box">
       <p>Title:</p>
       <input id="note_title_input" placeholder="Titel" type="text" />
 
       <p>Note:</p>
-      <input id="note_input" placeholder="Notiz" type="text" />
+      <textarea id="note_input" placeholder="Notiz" rows="4"></textarea>
 
       <button id="btn_add_note" onclick="addNote()">Notiz speichern</button>
     </div>
@@ -42,6 +46,17 @@
       <div class="contents_section">
         <h2>Trash</h2>
         <div id="trash_content" class="content_grid" ondragover="allowDrop(event)" ondrop="moveTo('trashNotes')"></div>
+      </div>
+    </div>
+
+    <div id="delete_dialog" class="dialog_overlay">
+      <div class="dialog_box">
+        <h3>Notiz löschen</h3>
+        <p>Möchten Sie diese Notiz permanent löschen?</p>
+        <div class="dialog_buttons">
+          <button id="dialog_cancel" class="dialog_btn dialog_btn_cancel">Abbrechen</button>
+          <button id="dialog_confirm" class="dialog_btn dialog_btn_confirm">Löschen</button>
+        </div>
       </div>
     </div>
 
