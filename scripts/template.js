@@ -1,13 +1,24 @@
-function getNoteTemplate(indexNote) {
+function getNoteTemplate(indexNote, note) {
   return `
-        <div draggable="true" ondragstart="startDragging(${indexNote}, 'notes')" class="note">
-            <h3>${allNotes.notesTitles[indexNote]}</h3>
-            <p>${allNotes.notes[indexNote]}</p>
+        <div draggable="true" ondragstart="startDragging(${note.id}, 'notes')" class="note">
+            <h3>${escapeHtml(note.title)}</h3>
+            <p class="note_content">${escapeHtml(note.content)}</p>
+            <div class="note_timestamps">
+                <small>Erstellt: ${formatDate(note.created)}</small>
+                ${
+                  note.modified !== note.created
+                    ? `<small>Geändert: ${formatDate(note.modified)}</small>`
+                    : ""
+                }
+            </div>
             <div>
-                <button onclick="moveNote(${indexNote}, 'notes', 'archivedNotes')" class="btn bg_green">
+                <button onclick="editNote(${note.id}, 'notes')" class="btn bg_blue">
+                    <img src="./assets/icons/edit.svg" alt="edit">
+                </button>
+                <button onclick="moveNote(${note.id}, 'notes', 'archivedNotes')" class="btn bg_green">
                     <img src="./assets/icons/archive.svg" alt="archive">
                 </button>
-                <button onclick="moveNote(${indexNote}, 'notes', 'trashNotes')" class="btn bg_red">
+                <button onclick="moveNote(${note.id}, 'notes', 'trashNotes')" class="btn bg_red">
                     <img src="./assets/icons/trash.svg" alt="trash">
                 </button>
             </div>
@@ -15,16 +26,27 @@ function getNoteTemplate(indexNote) {
         `;
 }
 
-function getArchivedNoteTemplate(indexArchivedNote) {
+function getArchivedNoteTemplate(indexArchivedNote, note) {
   return `
-        <div draggable="true" ondragstart="startDragging(${indexArchivedNote}, 'archivedNotes')" class="note">
-            <h3>${allNotes.archivedNotesTitles[indexArchivedNote]}</h3>
-            <p>${allNotes.archivedNotes[indexArchivedNote]}</p>
+        <div draggable="true" ondragstart="startDragging(${note.id}, 'archivedNotes')" class="note">
+            <h3>${escapeHtml(note.title)}</h3>
+            <p class="note_content">${escapeHtml(note.content)}</p>
+            <div class="note_timestamps">
+                <small>Erstellt: ${formatDate(note.created)}</small>
+                ${
+                  note.modified !== note.created
+                    ? `<small>Geändert: ${formatDate(note.modified)}</small>`
+                    : ""
+                }
+            </div>
             <div>
-                <button onclick="moveNote(${indexArchivedNote}, 'archivedNotes', 'notes')" class="btn bg_yellow">
+                <button onclick="editNote(${note.id}, 'archivedNotes')" class="btn bg_blue">
+                    <img src="./assets/icons/edit.svg" alt="edit">
+                </button>
+                <button onclick="moveNote(${note.id}, 'archivedNotes', 'notes')" class="btn bg_yellow">
                     <img src="./assets/icons/note.svg" alt="note">
                 </button>
-                <button onclick="moveNote(${indexArchivedNote}, 'archivedNotes', 'trashNotes')" class="btn bg_red">
+                <button onclick="moveNote(${note.id}, 'archivedNotes', 'trashNotes')" class="btn bg_red">
                     <img src="./assets/icons/trash.svg" alt="trash">
                 </button>
             </div>
@@ -32,16 +54,24 @@ function getArchivedNoteTemplate(indexArchivedNote) {
         `;
 }
 
-function getTrashNoteTemplate(indexTrashNote) {
+function getTrashNoteTemplate(indexTrashNote, note) {
   return `
-        <div draggable="true" ondragstart="startDragging(${indexTrashNote}, 'trashNotes')" class="note">
-            <h3>${allNotes.trashNotesTitles[indexTrashNote]}</h3>
-            <p>${allNotes.trashNotes[indexTrashNote]}</p>
+        <div draggable="true" ondragstart="startDragging(${note.id}, 'trashNotes')" class="note">
+            <h3>${escapeHtml(note.title)}</h3>
+            <p class="note_content">${escapeHtml(note.content)}</p>
+            <div class="note_timestamps">
+                <small>Erstellt: ${formatDate(note.created)}</small>
+                ${
+                  note.modified !== note.created
+                    ? `<small>Geändert: ${formatDate(note.modified)}</small>`
+                    : ""
+                }
+            </div>
             <div>
-                <button onclick="moveNote(${indexTrashNote}, 'trashNotes', 'notes')" class="btn bg_yellow">
+                <button onclick="moveNote(${note.id}, 'trashNotes', 'notes')" class="btn bg_yellow">
                     <img src="./assets/icons/note.svg" alt="note">
                 </button>
-                <button onclick="deleteNote(${indexTrashNote})" class="btn bg_red">
+                <button onclick="deleteNote(${note.id})" class="btn bg_red">
                     <img src="./assets/icons/trash.svg" alt="trash">
                 </button>
             </div>
