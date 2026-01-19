@@ -1,25 +1,61 @@
 .note {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  min-height: 200px;
   background-color: rgb(40, 40, 40);
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 8px;
+  padding: 12px;
   border-radius: 8px;
+  cursor: grab;
 }
 
-.note > h3,
-.note > p {
+.note:active {
+  cursor: grabbing;
+}
+
+.note > h3 {
   display: flex;
   justify-content: center;
   width: 100%;
+  font-size: 16px;
+  margin-bottom: 8px;
+  word-wrap: break-word;
+  text-align: center;
 }
 
-.note > div {
+.note_content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 13px;
+  flex-grow: 1;
+  overflow-y: auto;
+  word-wrap: break-word;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.note_timestamps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+  gap: 4px;
+}
+
+.note_timestamps > small {
+  font-size: 10px;
+  color: #ccc;
+  text-align: center;
+}
+
+.note > div:last-child {
   display: flex;
   justify-content: space-around;
   width: 100%;
+  gap: 4px;
 }
