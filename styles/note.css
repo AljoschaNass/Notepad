@@ -1,41 +1,61 @@
 .note {
-  width: 200px;
-  min-height: 200px;
-  background-color: rgb(40, 40, 40);
-  color: white;
+  width: 100%;
+  min-width: 220px;
+  max-width: 280px;
+  min-height: 220px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+  color: #333;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 16px;
+  border-radius: 12px;
   cursor: grab;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e0e4e8;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.note:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.15);
 }
 
 .note:active {
   cursor: grabbing;
+  transform: scale(0.98);
 }
 
 .note > h3 {
   display: flex;
   justify-content: center;
   width: 100%;
-  font-size: 16px;
-  margin-bottom: 8px;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 12px;
   word-wrap: break-word;
   text-align: center;
+  color: #2c3e50;
+  line-height: 1.3;
 }
 
 .note_content {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
-  font-size: 13px;
+  font-size: 14px;
   flex-grow: 1;
   overflow-y: auto;
   word-wrap: break-word;
-  text-align: center;
-  margin-bottom: 8px;
+  text-align: left;
+  margin-bottom: 12px;
+  color: #555;
+  line-height: 1.5;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
 }
 
 .note_timestamps {
@@ -43,19 +63,23 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   gap: 4px;
+  padding-top: 8px;
+  border-top: 1px solid #e0e4e8;
 }
 
 .note_timestamps > small {
-  font-size: 10px;
-  color: #ccc;
+  font-size: 11px;
+  color: #888;
   text-align: center;
+  font-weight: 500;
 }
 
 .note > div:last-child {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
-  gap: 4px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
