@@ -16,37 +16,51 @@
   </head>
 
   <body onload="init()">
-    <h1>Notepad</h1>
+    <header class="app_header">
+      <h1>
+        <span class="header_icon">📝</span>
+        <span class="header_title">Notepad</span>
+      </h1>
+      <p class="header_subtitle">Organisiere deine Gedanken</p>
+    </header>
 
-    <div class="search_box">
-      <input id="search_input" placeholder="Notizen durchsuchen..." type="text" oninput="filterNotes()" />
-    </div>
+    <div class="main_container">
+      <aside class="sidebar_left">
+        <h2 class="section_title">Neue Notiz erstellen</h2>
 
-    <div class="input_box">
-      <p>Title:</p>
-      <input id="note_title_input" placeholder="Titel" type="text" />
+        <div class="input_box">
+          <label for="note_title_input">Titel</label>
+          <input id="note_title_input" placeholder="Titel eingeben..." type="text" />
 
-      <p>Note:</p>
-      <textarea id="note_input" placeholder="Notiz" rows="4"></textarea>
+          <label for="note_input">Notiz</label>
+          <textarea id="note_input" placeholder="Schreibe deine Gedanken..." rows="8"></textarea>
 
-      <button id="btn_add_note" onclick="addNote()">Notiz speichern</button>
-    </div>
+          <button id="btn_add_note" onclick="addNote()">Notiz speichern</button>
+        </div>
+      </aside>
 
-    <div class="note_box">
-      <div class="contents_section">
-        <h2>Notes</h2>
-        <div id="notes_content" class="content_grid" ondragover="allowDrop(event)" ondrop="moveTo('notes')"></div>
-      </div>
+      <main class="content_main">
+        <div class="search_box">
+          <input id="search_input" placeholder="Notizen durchsuchen..." type="text" oninput="filterNotes()" />
+        </div>
 
-      <div class="contents_section">
-        <h2>Archive</h2>
-        <div id="archived_content" class="content_grid" ondragover="allowDrop(event)" ondrop="moveTo('archivedNotes')"></div>
-      </div>
+        <div class="note_box">
+          <div class="contents_section">
+            <h2>Notes</h2>
+            <div id="notes_content" class="content_grid" ondragover="allowDrop(event)" ondrop="moveTo('notes')"></div>
+          </div>
 
-      <div class="contents_section">
-        <h2>Trash</h2>
-        <div id="trash_content" class="content_grid" ondragover="allowDrop(event)" ondrop="moveTo('trashNotes')"></div>
-      </div>
+          <div class="contents_section">
+            <h2>Archive</h2>
+            <div id="archived_content" class="content_grid" ondragover="allowDrop(event)" ondrop="moveTo('archivedNotes')"></div>
+          </div>
+
+          <div class="contents_section">
+            <h2>Trash</h2>
+            <div id="trash_content" class="content_grid" ondragover="allowDrop(event)" ondrop="moveTo('trashNotes')"></div>
+          </div>
+        </div>
+      </main>
     </div>
 
     <div id="delete_dialog" class="dialog_overlay">
