@@ -364,3 +364,155 @@ function filterNotes() {
   searchTerm = searchInputRef.value;
   renderAllNotes();
 }
+
+function calculateStatistics() {
+  let stats = {
+    totalNotes: allNotes.notes.length,
+    archivedNotes: allNotes.archivedNotes.length,
+    trashedNotes: allNotes.trashNotes.length,
+    totalWords: 0,
+    totalCharacters: 0,
+    averageWordsPerNote: 0,
+    longestNote: null,
+    shortestNote: null,
+    oldestNote: null,
+    newestNote: null,
+    mostEditedNote: null,
+  };
+
+  let allActiveNotes = [...allNotes.notes, ...allNotes.archivedNotes];
+
+  if (allActiveNotes.length > 0) {
+    allActiveNotes.forEach((note) => {
+      let wordCount = note.content.trim().split(/\s+/).filter((w) => w.length > 0).length;
+      stats.totalWords += wordCount;
+      stats.totalCharacters += note.content.length;
+
+      if (!stats.longestNote || note.content.length > stats.longestNote.content.length) {
+        stats.longestNote = note;
+      }
+
+      if (!stats.shortestNote || note.content.length < stats.shortestNote.content.length) {
+        stats.shortestNote = note;
+      }
+
+      if (!stats.oldestNote || note.created < stats.oldestNote.created) {
+        stats.oldestNote = note;
+      }
+
+      if (!stats.newestNote || note.created > stats.newestNote.created) {
+        stats.newestNote = note;
+      }
+
+      let editCount = note.modified !== note.created ? 1 : 0;
+      if (!stats.mostEditedNote || editCount > 0) {
+        stats.mostEditedNote = note;
+      }
+    });
+
+    stats.averageWordsPerNote = Math.round(stats.totalWords / allActiveNotes.length);
+  }
+
+  return stats;
+}
+
+function showStatistics() {
+  let stats = calculateStatistics();
+  let dialog = document.getElementById("statistics_dialog");
+  let contentDiv = document.getElementById("statistics_content");
+
+  let html = `
+    <div class="stats_grid">
+      <div class="stat_card stat_primary">
+        <div class="stat_icon">📝</div>
+        <div class="stat_value">${stats.totalNotes}</div>
+        <div class="stat_label">Aktive Notizen</div>
+      </div>
+
+      <div class="stat_card stat_info">
+        <div class="stat_icon">📦</div>
+        <div class="stat_value">${stats.archivedNotes}</div>
+        <div class="stat_label">Archivierte Notizen</div>
+      </div>
+
+      <div class="stat_card stat_warning">
+        <div class="stat_icon">🗑️</div>
+        <div class="stat_value">${stats.trashedNotes}</div>
+        <div class="stat_label">Im Papierkorb</div>
+      </div>
+
+      <div class="stat_card stat_success">
+        <div class="stat_icon">💬</div>
+        <div class="stat_value">${stats.totalWords}</div>
+        <div class="stat_label">Gesamt Wörter</div>
+      </div>
+
+      <div class="stat_card stat_info">
+        <div class="stat_icon">📊</div>
+        <div class="stat_value">${stats.averageWordsPerNote}</div>
+        <div class="stat_label">⌀ Wörter pro Notiz</div>
+      </div>
+
+      <div class="stat_card stat_primary">
+        <div class="stat_icon">🔤</div>
+        <div class="stat_value">${stats.totalCharacters}</div>
+        <div class="stat_label">Gesamt Zeichen</div>
+      </div>
+    </div>
+
+    ${
+      stats.longestNote
+        ? `
+    <div class="stat_detail">
+      <h4>📏 Längste Notiz</h4>
+      <p><strong>${escapeHtml(stats.longestNote.title)}</strong></p>
+      <p class="stat_detail_info">${stats.longestNote.content.length} Zeichen</p>
+    </div>
+    `
+        : ""
+    }
+
+    ${
+      stats.oldestNote
+        ? `
+    <div class="stat_detail">
+      <h4>🕰️ Älteste Notiz</h4>
+      <p><strong>${escapeHtml(stats.oldestNote.title)}</strong></p>
+      <p class="stat_detail_info">Erstellt: ${formatDate(stats.oldestNote.created)}</p>
+    </div>
+    `
+        : ""
+    }
+
+    ${
+      stats.newestNote
+        ? `
+    <div class="stat_detail">
+      <h4>✨ Neueste Notiz</h4>
+      <p><strong>${escapeHtml(stats.newestNote.title)}</strong></p>
+      <p class="stat_detail_info">Erstellt: ${formatDate(stats.newestNote.created)}</p>
+    </div>
+    `
+        : ""
+    }
+  `;
+
+  contentDiv.innerHTML = html;
+  dialog.classList.add("show");
+
+  let closeBtn = document.getElementById("stats_close");
+  closeBtn.onclick = function () {
+    closeStatistics();
+  };
+
+  dialog.onclick = function (event) {
+    if (event.target === dialog) {
+      closeStatistics();
+    }
+  };
+}
+
+function closeStatistics() {
+  let dialog = document.getElementById("statistics_dialog");
+  dialog.classList.remove("show");
+}
